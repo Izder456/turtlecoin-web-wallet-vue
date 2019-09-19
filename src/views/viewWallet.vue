@@ -1,11 +1,7 @@
 <template>
   <div class="view" style="margin-top: 20px;">
     <div class="columns is-mobile">
-      <div class="column is-three-fifths is-offset-one-fifth">
-        <b-field label="Message">
-          <b-input ref="output" type="textarea">{{ output }}</b-input>
-        </b-field>
-      </div>
+      <div class="column is-three-fifths is-offset-one-fifth"></div>
     </div>
   </div>
 </template>
@@ -20,9 +16,7 @@ const daemon: IDaemon = new Daemon("blockapi.turtlepay.io", 443);
 @Component({
   components: {},
   data: function() {
-    return {
-      output: null
-    };
+    return {};
   },
   methods: {
     onSubmit(e) {}
@@ -50,8 +44,6 @@ const daemon: IDaemon = new Daemon("blockapi.turtlepay.io", 443);
         await wallet.start();
 
         console.log(wallet);
-
-        this.$data.output = wallet.toString();
       }
     }
   }

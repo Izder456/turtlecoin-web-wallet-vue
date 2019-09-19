@@ -14,8 +14,8 @@
               expanded
             >
               <option v-for="(wallet, index) in wallets" :key="index">
-                {{ wallet.name }}</option
-              >
+                {{ wallet.name }}
+              </option>
             </b-select>
           </b-field>
 
@@ -60,34 +60,33 @@
 import { Component, Vue } from "vue-property-decorator";
 import { ValidationObserver } from "vee-validate";
 import BInputWithValidation from "../components/inputs/BInputWithValidation.vue";
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions } from "vuex";
 
 @Component({
   components: {
     ValidationObserver,
     BInputWithValidation
   },
+  props: {},
   data: function() {
     return {
-      wallet: '',
+      wallet: null,
       password: null
     };
   },
   computed: {
     ...mapGetters({
-      wallets: 'getWallets'
+      wallets: "getWallets"
     })
   },
   methods: {
-    ...mapActions([
-      'setWallet'
-    ]),
+    ...mapActions(["setWallet"]),
     onSubmit() {
       // load the wallet by setting the wallet prop in our vuex store
-      this.setWallet({
-        wallet: this.wallet,
-        password: this.password
-      })
+      this.$store.state.setWallet({
+        wallet: this.$data.wallet,
+        password: this.$data.password
+      });
 
       //set open wallet in localSession
       // sessionStorage.setItem("wallet", e.target.elements.password.value);
@@ -108,7 +107,6 @@ import { mapGetters, mapActions } from 'vuex'
     //       // ignore as it's probably not the data we need
     //   }
     // })
-
     //Redirect to app
     // if (sessionStorage.length >= 1) {
     //   this.$router.push("/");
