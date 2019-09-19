@@ -82,35 +82,16 @@ import { mapGetters, mapActions } from "vuex";
   methods: {
     ...mapActions(["setWallet"]),
     onSubmit() {
-      // load the wallet by setting the wallet prop in our vuex store
+
+      // Store open wallet in store
       this.$store.state.setWallet({
         wallet: this.$data.wallet,
         password: this.$data.password
       });
 
-      //set open wallet in localSession
-      // sessionStorage.setItem("wallet", e.target.elements.password.value);
-      // sessionStorage.setItem("password", e.target.elements.wallet.value);
-
+      // Redirect to app
       this.$router.push("/");
     }
-  },
-  created() {
-    // we don't need this anymore because we are storing in vuex
-    // this.wallets = Object.entries({ ...localStorage }).filter(wallet => {
-    //   try {
-    //       const storageData = JSON.parse(wallet[1])
-    //       if(storageData.hasOwnProperty('address')) {
-    //         return wallet
-    //       }
-    //   } catch (e) {
-    //       // ignore as it's probably not the data we need
-    //   }
-    // })
-    //Redirect to app
-    // if (sessionStorage.length >= 1) {
-    //   this.$router.push("/");
-    // }
   }
 })
 export default class Open extends Vue {}
