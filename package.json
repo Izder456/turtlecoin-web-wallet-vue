@@ -14,7 +14,7 @@
     "cleave.js": "^1.5.3",
     "core-js": "^2.6.5",
     "jdenticon": "^2.2.0",
-    "turtlecoin-wallet-backend": "^4.0.2",
+    "turtlecoin-wallet-backend": "https://github.com/fexra/turtlecoin-wallet-backend-js",
     "vee-validate": "^3.0.6",
     "vue": "^2.6.10",
     "vue-class-component": "^7.0.2",

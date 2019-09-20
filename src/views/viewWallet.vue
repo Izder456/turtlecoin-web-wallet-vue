@@ -22,29 +22,14 @@ const daemon: IDaemon = new Daemon("blockapi.turtlepay.io", 443);
     onSubmit(e) {}
   },
   async created() {
+    
     //Redirect to Open
     if (sessionStorage.length <= 0) {
       this.$router.push("/open");
     } else {
-      // Grab encrypted wallet string based on session load
-      const encryptedString = JSON.parse(
-        localStorage.getItem(sessionStorage.getItem("wallet") || "") || ""
-      );
+      
+      // Open wallet
 
-      // Open the wallet
-      const [wallet, error] = WalletBackend.openWalletFromEncryptedString(
-        daemon,
-        encryptedString.data,
-        sessionStorage.getItem("password") || ""
-      );
-
-      if (error) {
-        console.log("Failed to load wallet: " + error.toString());
-      } else if (wallet) {
-        await wallet.start();
-
-        console.log(wallet);
-      }
     }
   }
 })

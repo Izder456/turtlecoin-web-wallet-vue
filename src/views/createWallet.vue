@@ -166,24 +166,7 @@ import { mapActions } from "vuex";
 import BInputWithValidation from "../components/inputs/BInputWithValidation.vue";
 import BTaginputWithValidation from "../components/inputs/BTaginputWithValidation.vue";
 
-//Connect to network
 import { WalletBackend, Daemon, IDaemon } from "turtlecoin-wallet-backend";
-const daemon: IDaemon = new Daemon("blockapi.turtlepay.io", 443);
-const wallet: WalletBackend = WalletBackend.createWallet(daemon);
-
-// Get address
-const address = wallet.getPrimaryAddress();
-
-// Generate jDenticon avatar
-const avatar = jdenticon.toSvg(address, 300);
-
-// Get Mnenomics
-let mnemonicsArray: any;
-const [mnemonics, mnemonicsError] = wallet.getMnemonicSeed();
-
-if (mnemonics) {
-  mnemonicsArray = mnemonics.trim().split(" ");
-}
 
 @Component({
   components: {
@@ -193,18 +176,44 @@ if (mnemonics) {
   },
   data: function() {
     return {
-      address: address,
-      avatar: avatar,
+      address: null,
+      avatar: null,
       name: null,
       password: null,
       repeat: null,
-      mnemonics: mnemonicsArray,
+      mnemonics: null,
       confirm: null,
       invalid: true,
       passes: false
     };
   },
+  created () {
 
+     window.addEventListener('load', () => {
+
+
+       //Connect to network
+      const daemon: IDaemon = new Daemon("blockapi.turtlepay.io", 443);
+      const wallet: WalletBackend = WalletBackend.createWallet(daemon);
+
+
+      // Get address
+      this.address = wallet.getPrimaryAddress();
+
+      // Generate jDenticon avatar
+      this.avatar = jdenticon.toSvg(this.address, 300);
+
+      // Get Mnenomics
+      const [mnemonics, mnemonicsError] = wallet.getMnemonicSeed();
+
+      if (mnemonics) {
+        this.mnemonics = mnemonics.trim().split(" ");
+      } 
+
+     })
+
+
+  },
   methods: {
     ...mapActions(["addWallet"]),
     onStep: function(s) {},
@@ -222,12 +231,13 @@ if (mnemonics) {
     },
     openLoading() {},
     onSubmit() {
-      // store wallet in vuex
+
+// store wallet in vuex
       this.$store.state.addWallet({
-        name: this.$data.name,
-        address: address,
+        name: this.name,
+        address: this.address,
         walletString: JSON.parse(
-          wallet.encryptWalletToString(this.$data.password)
+          wallet.encryptWalletToString(this.password)
         )
       });
 

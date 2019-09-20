@@ -85,8 +85,8 @@ import { mapGetters, mapActions } from "vuex";
 
       // Store open wallet in store
       this.$store.state.setWallet({
-        wallet: this.$data.wallet,
-        password: this.$data.password
+        wallet: this.wallet,
+        password: this.password
       });
 
       // Redirect to app
