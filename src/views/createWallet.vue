@@ -158,23 +158,23 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import { ValidationObserver } from "vee-validate";
-import jdenticon from "jdenticon";
-import { mapActions } from "vuex";
+import { Component, Vue } from 'vue-property-decorator';
+import { ValidationObserver } from 'vee-validate';
+import jdenticon from 'jdenticon';
+import { mapActions } from 'vuex';
 
-import BInputWithValidation from "../components/inputs/BInputWithValidation.vue";
-import BTaginputWithValidation from "../components/inputs/BTaginputWithValidation.vue";
+import BInputWithValidation from '../components/inputs/BInputWithValidation.vue';
+import BTaginputWithValidation from '../components/inputs/BTaginputWithValidation.vue';
 
-import { WalletBackend, Daemon, IDaemon } from "turtlecoin-wallet-backend";
+import { WalletBackend, Daemon, IDaemon } from 'turtlecoin-wallet-backend';
 
 @Component({
   components: {
     ValidationObserver,
     BInputWithValidation,
-    BTaginputWithValidation
+    BTaginputWithValidation,
   },
-  data: function() {
+  data() {
     return {
       address: null,
       avatar: null,
@@ -184,16 +184,16 @@ import { WalletBackend, Daemon, IDaemon } from "turtlecoin-wallet-backend";
       mnemonics: null,
       confirm: null,
       invalid: true,
-      passes: false
+      passes: false,
     };
   },
-  created () {
+  created() {
 
      window.addEventListener('load', () => {
 
 
-       //Connect to network
-      const daemon: IDaemon = new Daemon("blockapi.turtlepay.io", 443);
+       // Connect to network
+      const daemon: IDaemon = new Daemon('blockapi.turtlepay.io', 443);
       const wallet: WalletBackend = WalletBackend.createWallet(daemon);
 
 
@@ -207,26 +207,26 @@ import { WalletBackend, Daemon, IDaemon } from "turtlecoin-wallet-backend";
       const [mnemonics, mnemonicsError] = wallet.getMnemonicSeed();
 
       if (mnemonics) {
-        this.mnemonics = mnemonics.trim().split(" ");
-      } 
+        this.mnemonics = mnemonics.trim().split(' ');
+      }
 
-     })
+     });
 
 
   },
   methods: {
-    ...mapActions(["addWallet"]),
-    onStep: function(s) {},
-    onCopy: function(e) {
+    ...mapActions(['addWallet']),
+    onStep(s) {},
+    onCopy(e) {
       this.$buefy.toast.open({
-        message: "Copied to Clipboard",
-        type: "is-success"
+        message: 'Copied to Clipboard',
+        type: 'is-success',
       });
     },
-    onError: function(e) {
+    onError(e) {
       this.$buefy.toast.open({
-        message: "Failed to copy to Clipboard",
-        type: "is-danger"
+        message: 'Failed to copy to Clipboard',
+        type: 'is-danger',
       });
     },
     openLoading() {},
@@ -237,11 +237,11 @@ import { WalletBackend, Daemon, IDaemon } from "turtlecoin-wallet-backend";
         name: this.name,
         address: this.address,
         walletString: JSON.parse(
-          wallet.encryptWalletToString(this.password)
-        )
+          wallet.encryptWalletToString(this.password),
+        ),
       });
 
-      //store wallet in localStorage
+      // store wallet in localStorage
       // localStorage.setItem(
       //   this.name,
       //   JSON.stringify({
@@ -250,10 +250,10 @@ import { WalletBackend, Daemon, IDaemon } from "turtlecoin-wallet-backend";
       //   })
       // );
 
-      this.$router.push("/open");
-    }
+      this.$router.push('/open');
+    },
   },
-  watch: {}
+  watch: {},
 })
 export default class createWallet extends Vue {}
 </script>

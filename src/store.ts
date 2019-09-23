@@ -1,6 +1,6 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import createPersistedState from "vuex-persistedstate";
+import Vue from 'vue';
+import Vuex from 'vuex';
+import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex);
 
@@ -8,15 +8,15 @@ export default new Vuex.Store({
   plugins: [createPersistedState()],
   state: {
     wallets: [],
-    wallet: {}
+    wallet: {},
   },
   getters: {
-    getWallet: state => (index: number) => {
+    getWallet: (state) => (index: number) => {
       return state.wallets[index];
     },
     getWallets(state) {
       return state.wallets;
-    }
+    },
   },
   mutations: {
     addWallet(state, payload) {
@@ -24,14 +24,14 @@ export default new Vuex.Store({
     },
     setWallet(state, payload) {
       state.wallet = payload;
-    }
+    },
   },
   actions: {
     addWallet({ commit }, payload) {
-      commit("addWallet", payload);
+      commit('addWallet', payload);
     },
     setWallet({ commit }, payload) {
-      commit("setWallet", payload);
-    }
-  }
+      commit('setWallet', payload);
+    },
+  },
 });

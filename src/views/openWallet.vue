@@ -57,42 +57,42 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import { ValidationObserver } from "vee-validate";
-import BInputWithValidation from "../components/inputs/BInputWithValidation.vue";
-import { mapGetters, mapActions } from "vuex";
+import { Component, Vue } from 'vue-property-decorator';
+import { ValidationObserver } from 'vee-validate';
+import BInputWithValidation from '../components/inputs/BInputWithValidation.vue';
+import { mapGetters, mapActions } from 'vuex';
 
 @Component({
   components: {
     ValidationObserver,
-    BInputWithValidation
+    BInputWithValidation,
   },
   props: {},
-  data: function() {
+  data() {
     return {
       wallet: null,
-      password: null
+      password: null,
     };
   },
   computed: {
     ...mapGetters({
-      wallets: "getWallets"
-    })
+      wallets: 'getWallets',
+    }),
   },
   methods: {
-    ...mapActions(["setWallet"]),
+    ...mapActions(['setWallet']),
     onSubmit() {
 
       // Store open wallet in store
       this.$store.state.setWallet({
         wallet: this.wallet,
-        password: this.password
+        password: this.password,
       });
 
       // Redirect to app
-      this.$router.push("/");
-    }
-  }
+      this.$router.push('/');
+    },
+  },
 })
 export default class Open extends Vue {}
 </script>

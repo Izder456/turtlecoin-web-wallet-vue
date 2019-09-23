@@ -96,27 +96,27 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import { ValidationObserver } from "vee-validate";
+import { Component, Vue } from 'vue-property-decorator';
+import { ValidationObserver } from 'vee-validate';
 
-import BInputWithValidation from "../components/inputs/BInputWithValidation.vue";
-import BTaginputWithValidation from "../components/inputs/BTaginputWithValidation.vue";
+import BInputWithValidation from '../components/inputs/BInputWithValidation.vue';
+import BTaginputWithValidation from '../components/inputs/BTaginputWithValidation.vue';
 
 const methods = [
-  { index: 1, name: "File", icon: "download" },
-  { index: 2, name: "Seed", icon: "fingerprint" },
-  { index: 3, name: "Keys", icon: "key" }
+  { index: 1, name: 'File', icon: 'download' },
+  { index: 2, name: 'Seed', icon: 'fingerprint' },
+  { index: 3, name: 'Keys', icon: 'key' },
 ];
 
 @Component({
   components: {
     ValidationObserver,
     BInputWithValidation,
-    BTaginputWithValidation
+    BTaginputWithValidation,
   },
-  data: function() {
+  data() {
     return {
-      methods: methods,
+      methods,
       password: null,
       showFile: false,
       showSeed: false,
@@ -124,7 +124,7 @@ const methods = [
       walletFile: null,
       seedPhrase: null,
       privateViewKey: null,
-      privateSpendKey: null
+      privateSpendKey: null,
     };
   },
   methods: {
@@ -145,8 +145,8 @@ const methods = [
     },
     onSubmit(e) {
       console.log(e.target.elements.methods.value);
-    }
-  }
+    },
+  },
 })
 export default class importWallet extends Vue {}
 </script>

@@ -7,31 +7,31 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue } from 'vue-property-decorator';
 
-//Connect to network
-import { WalletBackend, Daemon, IDaemon } from "turtlecoin-wallet-backend";
-const daemon: IDaemon = new Daemon("blockapi.turtlepay.io", 443);
+// Connect to network
+import { WalletBackend, Daemon, IDaemon } from 'turtlecoin-wallet-backend';
+const daemon: IDaemon = new Daemon('blockapi.turtlepay.io', 443);
 
 @Component({
   components: {},
-  data: function() {
+  data() {
     return {};
   },
   methods: {
-    onSubmit(e) {}
+    onSubmit(e) {},
   },
   async created() {
-    
-    //Redirect to Open
+
+    // Redirect to Open
     if (sessionStorage.length <= 0) {
-      this.$router.push("/open");
+      this.$router.push('/open');
     } else {
-      
+
       // Open wallet
 
     }
-  }
+  },
 })
 export default class View extends Vue {}
 </script>
